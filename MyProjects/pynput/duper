@@ -1,0 +1,14 @@
+
+from pynput.keyboard import Controller as keyboardController
+from time import sleep
+from random import uniform
+
+keybord=keyboardController()
+
+def dropItem():
+    keybord.type("3")
+    keybord.type("q")
+
+
+sleep(1)
+dropItem()

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set the interval in seconds (e.g., 300 seconds = 5 minutes)
-INTERVAL=300
+## INTERVAL=300
 
 # Change to your repository directory if needed
 # cd /path/to/your/repo

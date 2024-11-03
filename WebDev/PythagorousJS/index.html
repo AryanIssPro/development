@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hypotenuse Finder</title>
+</head>
+<style>
+    body{font-family: sans-serif; 
+    font-size: large; 
+    background-color: rgb(255, 255, 231);
+    border: 2px;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px;
+    }
+</style>
+<body>
+    <h1>Hypotenuse Finder: Pythagorus Theurom</h1>
+    <label for="sideA">Enter the value of A:</label>
+    <br>
+    <input type="number" id="sideA">
+    <br>
+    <label for="sideB">Enter the value of B</label>
+    <br>
+    <input type="number" id="sideB">
+    <br>
+    <button onclick="calculate()">Calculate</button>
+    <br>
+    <p id="answer"></p>
+</body>
+<script>
+    function calculate() {
+        var a, b, c;
+        a=document.getElementById('sideA').value;
+        b=document.getElementById('sideB').value;
+        c=Math.sqrt((a**2)+(b**2));
+        document.getElementById("answer").innerText= `The lenght of hypotenuse is: ${c}`;
+    }
+</script>
+</html>

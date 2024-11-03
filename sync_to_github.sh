@@ -1,3 +1,4 @@
+# ./sync_to_github.sh
 git add -A
 git commit -m "Committing all changes made in Codespace"
 git push origin main

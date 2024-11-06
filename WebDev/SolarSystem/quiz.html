@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8">
+    <title>Solar System Quiz</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #0d1b32;
+            color: #ffffff;
+            padding: 0px;
+            margin: 0px;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.7);
+            overflow-x: hidden; /* Prevents horizontal scroll */
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(252, 70, 107, 0.8), rgba(63, 94, 251, 0.8));
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+        }
+
+        header h1 {
+            margin: 0px;
+            font-size: 3em;
+            text-transform: uppercase;
+        }
+
+        header p {
+            font-size: 1.2em;
+            margin-top: 5px;
+        }
+
+        .quiz-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            max-width: 800px;
+            max-width: 1000px;
+            padding: 30px;
+            margin-top: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+        }
+
+        .question {
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.7);
+            gap: 10px;
+        }
+
+        .option {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .option:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        #submit-button, #reset-button {
+            display: block;
+            background-color: #3b82f6;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.7);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 20px;
+            width: 100%;
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.7);
+
+        }
+
+        #submit-button:hover, #reset-button:hover {
+            background-color: #fc5c7d;
+            transform: translateY(-5px);
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        .question-score {
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, #002aff, #000c47);
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            width: 100%;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Solar System Quiz</h1>
+        <p>Test your knowledge of our Solar System!</p>
+    </header>
+
+    <div class="quiz-container">
+        <div class="question" id="question1">
+            <p>1. What is the largest planet in our Solar System?</p>
+            <div class="options">
+                <button class="option" data-correct="true">Jupiter</button>
+                <button class="option">Earth</button>
+                <button class="option">Mars</button>
+                <button class="option">Venus</button>
+            </div>
+            <div class="question-score" id="score1"></div>
+        </div>
+        
+        <div class="question" id="question2">
+            <p>2. Which planet is known as the "Red Planet"?</p>
+            <div class="options">
+                <button class="option">Jupiter</button>
+                <button class="option">Venus</button>
+                <button class="option" data-correct="true">Mars</button>
+                <button class="option">Saturn</button>
+            </div>
+            <div class="question-score" id="score2"></div>
+        </div>
+        
+        <div class="question" id="question3">
+            <p>3. What planet is closest to the Sun?</p>
+            <div class="options">
+                <button class="option" data-correct="true">Mercury</button>
+                <button class="option">Earth</button>
+                <button class="option">Mars</button>
+                <button class="option">Venus</button>
+            </div>
+            <div class="question-score" id="score3"></div>
+        </div>
+        
+        <div class="question" id="question4">
+            <p>4. What planet is known for its prominent ring system?</p>
+            <div class="options">
+                <button class="option">Jupiter</button>
+                <button class="option" data-correct="true">Saturn</button>
+                <button class="option">Neptune</button>
+                <button class="option">Uranus</button>
+            </div>
+            <div class="question-score" id="score4"></div>
+        </div>
+        
+        <div class="question" id="question5">
+            <p>5. Which planet is the hottest in our Solar System?</p>
+            <div class="options">
+                <button class="option">Mercury</button>
+                <button class="option" data-correct="true">Venus</button>
+                <button class="option">Mars</button>
+                <button class="option">Earth</button>
+            </div>
+            <div class="question-score" id="score5"></div>
+        </div>
+        
+        <div class="question" id="question6">
+            <p>6. How many moons does Mars have?</p>
+            <div class="options">
+                <button class="option">1</button>
+                <button class="option" data-correct="true">2</button>
+                <button class="option">3</button>
+                <button class="option">4</button>
+            </div>
+            <div class="question-score" id="score6"></div>
+        </div>
+        
+        <div class="question" id="question7">
+            <p>7. Which planet has the longest day?</p>
+            <div class="options">
+                <button class="option">Earth</button>
+                <button class="option" data-correct="true">Venus</button>
+                <button class="option">Mars</button>
+                <button class="option">Jupiter</button>
+            </div>
+            <div class="question-score" id="score7"></div>
+        </div>
+        
+        <div class="question" id="question8">
+            <p>8. Which planet has the Great Red Spot?</p>
+            <div class="options">
+                <button class="option">Saturn</button>
+                <button class="option">Uranus</button>
+                <button class="option" data-correct="true">Jupiter</button>
+                <button class="option">Neptune</button>
+            </div>
+            <div class="question-score" id="score8"></div>
+        </div>
+        
+        <div class="question" id="question9">
+            <p>9. Which planet has the most moons?</p>
+            <div class="options">
+                <button class="option" data-correct="true">Saturn</button>
+                <button class="option">Jupiter</button>
+                <button class="option">Mars</button>
+                <button class="option">Earth</button>
+            </div>
+            <div class="question-score" id="score9"></div>
+        </div>
+        
+        <div class="question" id="question10">
+            <p>10. What is the smallest planet in our Solar System?</p>
+            <div class="options">
+                <button class="option">Earth</button>
+                <button class="option">Venus</button>
+                <button class="option">Mars</button>
+                <button class="option" data-correct="true">Mercury</button>
+            </div>
+            <div class="question-score" id="score10"></div>
+        </div>
+        
+        <div class="question" id="question11">
+            <p>11. Which planet has a tilted axis, giving it extreme seasons?</p>
+            <div class="options">
+                <button class="option">Mars</button>
+                <button class="option">Venus</button>
+                <button class="option">Earth</button>
+                <button class="option" data-correct="true">Uranus</button>
+            </div>
+            <div class="question-score" id="score11"></div>
+        </div>
+        
+        <div class="question" id="question12">
+            <p>12. What planet is often called Earth's "sister planet"?</p>
+            <div class="options">
+                <button class="option">Mars</button>
+                <button class="option" data-correct="true">Venus</button>
+                <button class="option">Jupiter</button>
+                <button class="option">Neptune</button>
+            </div>
+            <div class="question-score" id="score12"></div>
+        </div>
+        
+        <div class="question" id="question13">
+            <p>13. What is the fifth planet from the Sun?</p>
+            <div class="options">
+                <button class="option">Mars</button>
+                <button class="option" data-correct="true">Jupiter</button>
+                <button class="option">Saturn</button>
+                <button class="option">Earth</button>
+            </div>
+            <div class="question-score" id="score13"></div>
+        </div>
+        
+        <div class="question" id="question14">
+            <p>14. Which planet has the fastest rotation?</p>
+            <div class="options">
+                <button class="option" data-correct="true">Jupiter</button>
+                <button class="option">Earth</button>
+                <button class="option">Venus</button>
+                <button class="option">Mars</button>
+            </div>
+            <div class="question-score" id="score14"></div>
+        </div>
+        
+        <div class="question" id="question15">
+            <p>15. Which planet has rings made primarily of ice and rock?</p>
+            <div class="options">
+                <button class="option">Jupiter</button>
+                <button class="option" data-correct="true">Saturn</button>
+                <button class="option">Uranus</button>
+                <button class="option">Neptune</button>
+            </div>
+            <div class="question-score" id="score15"></div>
+        </div>
+        
+        <div class="question" id="question16">
+            <p>16. Which planet has the shortest orbit around the Sun?</p>
+            <div class="options">
+                <button class="option" data-correct="true">Mercury</button>
+                <button class="option">Venus</button>
+                <button class="option">Earth</button>
+                <button class="option">Mars</button>
+            </div>
+            <div class="question-score" id="score16"></div>
+        </div>
+        
+        <div class="question" id="question17">
+            <p>17. Which planet's atmosphere is mostly nitrogen and oxygen?</p>
+            <div class="options">
+                <button class="option">Mars</button>
+                <button class="option">Venus</button>
+                <button class="option" data-correct="true">Earth</button>
+                <button class="option">Neptune</button>
+            </div>
+            <div class="question-score" id="score17"></div>
+        </div>
+        
+        <div class="question" id="question18">
+            <p>18. Which planet's moon is called Titan?</p>
+            <div class="options">
+                <button class="option">Jupiter</button>
+                <button class="option" data-correct="true">Saturn</button>
+                <button class="option">Mars</button>
+                <button class="option">Neptune</button>
+            </div>
+            <div class="question-score" id="score18"></div>
+        </div>
+        
+        <div class="question" id="question19">
+            <p>19. Which planet was demoted to a "dwarf planet" in 2006?</p>
+            <div class="options">
+                <button class="option">Neptune</button>
+                <button class="option" data-correct="true">Pluto</button>
+                <button class="option">Mercury</button>
+                <button class="option">Venus</button>
+            </div>
+            <div class="question-score" id="score19"></div>
+        </div>
+        
+        <div class="question" id="question20">
+            <p>20. Which planet has a moon named Phobos?</p>
+            <div class="options">
+                <button class="option">Jupiter</button>
+                <button class="option">Saturn</button>
+                <button class="option" data-correct="true">Mars</button>
+                <button class="option">Uranus</button>
+            </div>
+            <div class="question-score" id="score20"></div>
+        </div>
+        <!-- Submit and Reset Buttons -->
+        <button id="submit-button" onclick="showResult()">Submit Answers</button>
+        <button id="reset-button" onclick="resetQuiz()">Reset Quiz</button>
+
+        <!-- Result Display -->
+        <div id="result"></div>
+        
+    </div>
+
+
+
+    <footer>
+        <p>© 2024 The Solar System Exhibition</p>
+    </footer>
+
+    <script>
+        let score = 0;
+
+        function showResult() {
+            score = 0;
+            const questions = document.querySelectorAll('.question');
+        
+            questions.forEach((question, index) => {
+                const options = question.querySelectorAll('.option');
+                const scoreDisplay = document.getElementById(`score${index + 1}`);
+                let selectedOption = Array.from(options).find(option => option.style.backgroundColor === 'blue');
+            
+                options.forEach(option => {
+                    option.disabled = true;
+                    option.style.backgroundColor = option.dataset.correct === 'true' ? 'green' : option.style.backgroundColor;
+                });
+            
+                if (selectedOption) {
+                    if (selectedOption.dataset.correct === 'true') {
+                        score+=1;
+                        scoreDisplay.innerHTML = "Score: 1 point";
+                    } else {             
+                        selectedOption.style.backgroundColor = 'red';
+                        scoreDisplay.innerHTML = "Score: 0 points";
+                    }
+                } else {
+                    scoreDisplay.innerHTML = "Score: 0 points";
+                }
+            });
+        
+            document.getElementById('result').innerHTML = `You scored ${score} out of ${questions.length}!`;
+        }
+
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const options = this.parentElement.querySelectorAll('.option');
+                options.forEach(option => option.style.backgroundColor = '');
+                this.style.backgroundColor = 'blue';
+            });
+        });
+
+        function resetQuiz() {
+            score = 0;
+            document.getElementById('result').innerHTML = '';
+        
+            document.querySelectorAll('.question-score').forEach(scoreDisplay => scoreDisplay.innerHTML = '');
+            document.querySelectorAll('.option').forEach(option => {
+                option.disabled = false;
+                option.style.backgroundColor = '';
+            });
+        }
+
+    </script>
+</body>
+</html>

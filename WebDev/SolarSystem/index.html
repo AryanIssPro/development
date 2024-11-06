@@ -12,6 +12,8 @@
             line-height: 1.6;
             padding: 0px;
             margin: 0px;
+            text-shadow:  2px 2px 3px rgba(0, 0, 0, 0.7);
+
         }
 
         header {
@@ -19,7 +21,6 @@
             padding: 20px;
             text-align: center;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
-            transition: zoom 3s ease;
         }
 
         header h1 {
@@ -80,6 +81,7 @@
             background: linear-gradient(to right, #6a82fb, #fc5c7d);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: none;
             transition: background-color 0.3s;
         }
 
@@ -102,12 +104,13 @@
         #quiz-button {
             margin: 20px auto;
             display: block;
-            background-color: #6a82fb;
+            background-color: #3b82f6;
             color: white;
             padding: 15px 30px;
             border: none;
             border-radius: 5px;
             text-align: center;
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.7);
             box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.7);
             transition: background-color 0.3s, transform 0.3s ease, box-shadow 0.3s ease;
             font-size: 1.2em;
@@ -262,7 +265,7 @@
     </main>
 
     <!-- Quiz Button -->
-    <button id="quiz-button" onclick="window.open('Quiz.html')">Take the Quiz!</button>
+    <button id="quiz-button" onclick="window.open('quiz.html')">Take the Quiz!</button>
     <footer>
         <p>&copy; 2024 The Solar System Exhibition</p>
     </footer>

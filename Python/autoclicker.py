@@ -11,7 +11,7 @@ mouse = MouseController()
 def click():
     print("Performed!")
     mouse.click(Button.left, 100)  # Performs a left-click with the mouse
-    sleep(0.1)
+    sleep(0.09)
 
 # Define what happens on each key press
 def on_press(key):

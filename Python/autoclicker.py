@@ -24,3 +24,4 @@ def on_press(key):
 # Start listening to keyboard events
 with KeyboardListener(on_press=on_press) as listener:
     listener.join()
+

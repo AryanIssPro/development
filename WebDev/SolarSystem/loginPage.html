@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<<<<<<< HEAD
     <title>Login Page</title>
     <style>
          body {
@@ -39,10 +40,54 @@
         #buttonDiv{
             align-items: center;
 
+=======
+    <title>Student Login - Solar System Quiz</title>
+    <style>
+        /* Basic styling for the login page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0d1b32;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        input[type="text"], input[type="number"], button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            background-color: #3b82f6;
+            color: #ffffff;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #fc5c7d;
+>>>>>>> 5c363edd932ddf5856d852260f44c29330883b66
         }
     </style>
 </head>
 <body>
+<<<<<<< HEAD
     <div id="main">
         <h2>Please login with your name and sr. no.:</h2>
         <p>Enter your name:</p>
@@ -53,5 +98,28 @@
             <button id="loginButton">Login</button>
         </div>
     </div>
+=======
+    <div class="login-container">
+        <h2>Student Login</h2>
+        <input type="number" id="rollNumber" placeholder="Enter your SR Number" required>
+        <input type="text" id="studentName" placeholder="Enter your Name" required>
+        <button onclick="startQuiz()">Start Quiz</button>
+    </div>
+
+    <script>
+        function startQuiz() {
+            const rollNumber = document.getElementById("rollNumber").value;
+            const studentName = document.getElementById("studentName").value;
+
+            if (rollNumber && studentName) {
+                localStorage.setItem("rollNumber", rollNumber);
+                localStorage.setItem("studentName", studentName);
+                window.location.href = "quiz.html"; // Redirect to the quiz page
+            } else {
+                alert("Please enter both your SR Number and Name.");
+            }
+        }
+    </script>
+>>>>>>> 5c363edd932ddf5856d852260f44c29330883b66
 </body>
 </html>

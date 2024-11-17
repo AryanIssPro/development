@@ -1,0 +1,230 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background: linear-gradient(90deg, #0073e6, #005bb5);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+header p {
+    font-size: 1rem;
+    margin-top: 5px;
+}
+
+main {
+    padding: 20px;
+}
+
+/* Section Titles */
+h2 {
+    color: #0073e6;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Subject List Container */
+#subject-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Subject Card Styling */
+.subject-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.subject-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.subject-card h3 {
+    margin: 0 0 10px;
+    font-size: 1.5rem;
+    color: #005bb5;
+    text-transform: uppercase;
+}
+
+/* Chapter List */
+.chapter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 8px 0;
+    padding: 5px 10px;
+    border-radius: 6px;
+    background: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chapter:hover {
+    background: #f1f5ff;
+}
+
+.chapter span {
+    flex: 1;
+    text-align: left;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+/* Status Dropdown */
+.chapter-select {
+    font-size: 0.9rem;
+    padding: 6px 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.chapter-select:focus {
+    border-color: #0073e6;
+    outline: none;
+}
+
+/* Progress Bar */
+.progress-bar {
+    flex: 1;
+    height: 8px;
+    background: #ddd;
+    border-radius: 5px;
+    margin: 0 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(90deg, #ff6666, #ffc107, #28a745);
+    width: 0%;
+    transition: width 0.4s ease;
+    border-radius: 5px;
+}
+
+/* Floating Button */
+.floating-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #0073e6;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.floating-btn:hover {
+    background: #005bb5;
+    transform: scale(1.1);
+}
+
+.floating-btn:active {
+    transform: scale(0.95);
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .subject-card {
+        padding: 12px;
+    }
+
+    .chapter span {
+        font-size: 0.85rem;
+    }
+
+    .chapter-select {
+        font-size: 0.85rem;
+    }
+
+    #subject-list {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    header h1 {
+        font-size: 1.6rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    .subject-card {
+        padding: 10px;
+    }
+
+    .chapter span {
+        font-size: 0.8rem;
+    }
+
+    .chapter-select {
+        font-size: 0.8rem;
+    }
+
+    #subject-list {
+        grid-template-columns: 1fr;
+    }
+
+    .floating-btn {
+        width: 50px;
+        height: 50px;
+    }
+}
+/* Styling for Notes Box under each chapter */
+.chapter .notes-container {
+    margin-top: 10px;
+}
+
+.chapter textarea.chapter-notes {
+    width: 100%;
+    height: 60px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    resize: none;
+    box-sizing: border-box;
+}

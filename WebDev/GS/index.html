@@ -4,73 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Olympiad Progress Tracker</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-       
-        header {
-            background-color: #0073e6;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        
-        header h1 {
-            margin: 0;
-            font-size: 2rem;
-        }
-        
-        header p {
-            margin: 10px 0 0;
-        }
-        
-        main {
-            padding: 20px;
-        }
-        
-        h2 {
-            color: #0073e6;
-        }
-        
-        #subject-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        
-        .subject-card {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 15px;
-            width: 200px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        
-        .subject-card h3 {
-            margin-bottom: 10px;
-        }
-        
-        button {
-            background: #0073e6;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            padding: 10px;
-            cursor: pointer;
-        }
-        
-        button:hover {
-            background: #005bb5;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
@@ -81,7 +15,7 @@
         <section id="subjects">
             <h2>Your Subjects</h2>
             <div id="subject-list">
-                <!-- Subjects will be dynamically inserted here -->
+                <!-- Subject Cards will be inserted here -->
             </div>
         </section>
     </main>
@@ -90,131 +24,8 @@
     </footer>
 
     <!-- Firebase and other JS -->
-<script type="module">
-    // Import necessary Firebase modules
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
-    import { getFirestore, collection, getDocs, setDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
-
-    // Firebase Configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyAy4LNR4xNKP3DekQav7oTu9j8zGLV3KJM",
-        authDomain: "gs-syllabus-tracker.firebaseapp.com",
-        databaseURL: "https://gs-syllabus-tracker-default-rtdb.asia-southeast1.firebasedatabase.app",
-        projectId: "gs-syllabus-tracker",
-        storageBucket: "gs-syllabus-tracker.firebasestorage.app",
-        messagingSenderId: "599402415347",
-        appId: "1:599402415347:web:b7d9e67be9f997c3bb6386",
-        measurementId: "G-NB5KBD1LTH"
-    };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-    const db = getFirestore(app);
-
-    // Subjects Data
-    const subjects = {
-        History: ["Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Chapter 6", "Chapter 7", "Chapter 8"],
-        Geography: ["Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5"],
-        Civics: ["Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Chapter 6", "Chapter 7", "Chapter 8"],
-        Science: ["Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Chapter 6", "Chapter 7", "Chapter 8", "Chapter 9", "Chapter 10", "Chapter 11", "Chapter 12", "Chapter 13"],
-        Maths: [...Array(20).keys()].map(i => `Chapter ${i + 1}`),
-    };
-
-    // Render Subjects and Chapters
-    const subjectList = document.getElementById("subject-list");
-
-    Object.entries(subjects).forEach(([subject, chapters]) => {
-        const subjectDiv = document.createElement("div");
-        subjectDiv.className = "subject-card";
-
-        const chapterList = chapters
-            .map(
-                chapter => `  
-            <div class="chapter">
-                <span>${chapter}</span>
-                <select class="chapter-select">
-                    <option value="Not Started">Not Started</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="Completed">Completed</option>
-                </select>
-            </div>`
-            )
-            .join(" ");
-
-        subjectDiv.innerHTML = ` 
-            <h3>${subject}</h3>
-            ${chapterList}
-        `;
-        subjectList.appendChild(subjectDiv);
-    });
-
-    // Load Progress from Firestore
-    async function loadProgress() {
-        const snapshot = await getDocs(collection(db, "subjects"));
-        snapshot.forEach(docSnap => {
-            const subject = docSnap.id;
-            const chapters = docSnap.data().chapters;
-
-            chapters.forEach(chapter => {
-                const subjectDiv = Array.from(document.querySelectorAll(".subject-card"))
-                    .find(div => div.querySelector("h3").textContent === subject);
-                if (subjectDiv) {
-                    const chapterDiv = Array.from(subjectDiv.querySelectorAll('.chapter'))
-                        .find(div => div.querySelector('span').textContent === chapter.name);
-                    if (chapterDiv) {
-                        const selectElement = chapterDiv.querySelector('select');
-                        selectElement.value = chapter.status;
-                    }
-                }
-            });
-        });
-    }
-
-    // Update Chapter Progress
-    async function updateChapter(subject, chapter, status) {
-        const subjectRef = doc(db, "subjects", subject);  // Get document reference for the subject
-        const docSnap = await getDoc(subjectRef);  // Use getDoc() instead of getDocs()
-
-        // If document exists, update the chapter status
-        if (docSnap.exists()) {
-            const existingData = docSnap.data();
-            const chapters = existingData.chapters || [];
-
-            // Find the chapter in the existing data and update its status
-            const chapterIndex = chapters.findIndex(ch => ch.name === chapter);
-            if (chapterIndex !== -1) {
-                chapters[chapterIndex].status = status;
-            } else {
-                chapters.push({ name: chapter, status });
-            }
-
-            // Set the updated chapters
-            await setDoc(subjectRef, { chapters }, { merge: true });
-        } else {
-            // If no document exists for the subject, create it
-            await setDoc(subjectRef, { chapters: [{ name: chapter, status }] });
-        }
-    }
-
-    // Add event listeners to all select elements after the page is rendered
-    document.addEventListener('DOMContentLoaded', () => {
-        const selectElements = document.querySelectorAll(".chapter-select");
-
-        selectElements.forEach(select => {
-            select.addEventListener("change", (event) => {
-                const selectElement = event.target;
-                const subject = selectElement.closest(".subject-card").querySelector("h3").textContent;
-                const chapter = selectElement.previousElementSibling.textContent.trim();
-                const status = selectElement.value;
-                updateChapter(subject, chapter, status);
-            });
-        });
-
-        // Load progress on page load
-        loadProgress();
-    });
-</script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>

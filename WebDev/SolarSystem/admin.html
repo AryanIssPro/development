@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.8">
+  <title>Admin Panel</title>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Pre:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #0d1b32;
+      color: #ffffff;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.7);
+      min-height: 100vh; /* Ensures the page takes full height */
+      position: relative;
+      overflow-y: hidden;
+    }
+
+    header {
+      background: linear-gradient(to bottom, rgba(252, 70, 107, 0.8), rgba(63, 94, 251, 0.8));
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+      width: 97.4%;
+     
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 3em;
+      font-family: 'edu au vic wa nt pre';
+    }
+
+    header p {
+      font-size: 1.2em;
+      margin-top: 5px;
+    }
+
+    #admin-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0px 20px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding-bottom: 60px;
+    }
+
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background: #007bff;
+      color: white;
+      border-bottom: none;
+    }
+
+    td {
+      color: #e0e0e0;
+      border-bottom: none;
+    }
+
+    .action-btn {
+      display: block;
+      margin: 20px auto;
+      background-color: #3b82f6;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 5px;
+      text-align: center;
+      text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.7);
+      box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.7);
+      transition: background-color 0.3s, transform 0.3s ease, box-shadow 0.3s ease;
+      font-size: 1.2em;
+    }
+
+    .action-btn:hover {
+      background-color: #fc5c7d;
+      transform: translateY(-5px);
+    }
+
+    footer {
+      background: linear-gradient(to bottom, #002aff, #000c47);
+      color: #ffffff;
+      text-align: center;
+      padding: 30px;
+      box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.7);
+      position: absolute;
+      bottom: 0;
+      position: absolute;
+      bottom: 0;
+      width: 96%; /* Ensure the footer spans the entire width */ /* Ensure the footer spans the entire width */
+    }
+    footer p {
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Admin Panel</h1>
+    <p>Manage and view quiz results</p>
+  </header>
+
+  <div id="admin-container">
+    <button class="action-btn" id="fetch-results">Fetch Quiz Results</button>
+    <table class="results-table">
+      <thead>
+        <tr>
+          <th style="border-radius: 10px 0px 0px 10px;">Name</th>
+          <th>Class</th>
+          <th>Roll No.</th>
+          <th>Sr. No.</th>
+          <th>Score</th>
+          <th style="border-radius: 0px 10px 10px 0px;">Time</th>
+        </tr>
+      </thead>
+      <tbody id="results-body"></tbody>
+    </table>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 The Solar System Exhibition</p>
+  </footer>
+
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDF2JJARVu4aiwtzvsZXoVRkupAAiZc-Ak",
+      authDomain: "quiz-c3b84.firebaseapp.com",
+      projectId: "quiz-c3b84",
+      storageBucket: "quiz-c3b84.firebasestorage.app",
+      messagingSenderId: "631282406816",
+      appId: "1:631282406816:web:2e4a359f5c9c423c1000c5"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // Elements
+    const fetchResultsButton = document.getElementById("fetch-results");
+    const resultsTableBody = document.getElementById("results-body");
+
+    // Fetch quiz results
+    fetchResultsButton.addEventListener("click", async () => {
+      resultsTableBody.innerHTML = ""; // Clear previous results
+      try {
+        const snapshot = await db.collection("scores").get();
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          const row = `
+            <tr>
+              <td>${data.name}</td>
+              <td>${data.class}</td>
+              <td>${data.rollno}</td>
+              <td>${data.srno}</td>
+              <td>${data.score}</td>
+              <td>${new Date(data.timestamp.seconds * 1000).toLocaleString()}</td>
+            </tr>
+          `;
+          resultsTableBody.innerHTML += row;
+        });
+      } catch (error) {
+        console.error("Error fetching results:", error);
+        alert("Failed to fetch results. Check your Firestore configuration.");
+      }
+    });
+  </script>
+</body>
+</html>
+    

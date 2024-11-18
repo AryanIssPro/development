@@ -34,16 +34,16 @@ main {
 /* Section Titles */
 h2 {
     color: #0073e6;
-    font-size: 1.8rem;
+    font-size: 2.5rem;
     margin-bottom: 10px;
     text-align: center;
 }
 
 /* Subject List Container */
 #subject-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    display: grid;  
+    grid-template-columns: auto;
+    gap: 15px;
     margin-top: 20px;
 }
 
@@ -56,18 +56,18 @@ h2 {
     text-align: center;
     transition: transform 0.3s, box-shadow 0.3s;
     padding: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .subject-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
 }
 
 .subject-card h3 {
     margin: 0 0 10px;
-    font-size: 1.5rem;
-    color: #005bb5;
+    font-size: 1.8em;
+    color: #0057ae;
     text-transform: uppercase;
 }
 
@@ -75,7 +75,6 @@ h2 {
 .chapter {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     margin: 8px 0;
     padding: 5px 10px;
     border-radius: 6px;
@@ -91,7 +90,7 @@ h2 {
     flex: 1;
     text-align: left;
     font-weight: bold;
-    font-size: 0.9rem;
+    font-size: 1.2em;
     color: #333;
 }
 
@@ -104,6 +103,7 @@ h2 {
     background: #fff;
     cursor: pointer;
     transition: border-color 0.3s;
+    margin-right: 10px;
 }
 
 .chapter-select:focus {
@@ -117,7 +117,7 @@ h2 {
     height: 8px;
     background: #ddd;
     border-radius: 5px;
-    margin: 0 10px;
+    margin: 10px 10px 10px 0px ;
     overflow: hidden;
     position: relative;
 }
@@ -130,40 +130,19 @@ h2 {
     border-radius: 5px;
 }
 
-/* Floating Button */
-.floating-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #0073e6;
-    color: white;
-    font-size: 1rem;
-    border: none;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    transition: transform 0.3s, background 0.3s;
-}
-
-.floating-btn:hover {
-    background: #005bb5;
-    transform: scale(1.1);
-}
-
-.floating-btn:active {
-    transform: scale(0.95);
-}
-
 /* Mobile Responsiveness */
 @media screen and (max-width: 768px) {
+    .chapter textarea.chapter-notes {
+        width: 100%;  /* Ensure it is responsive */
+        resize: vertical;
+    }
+
     header h1 {
-        font-size: 2rem;
+        font-size: 2em;
     }
 
     h2 {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
     }
 
     .subject-card {
@@ -171,25 +150,26 @@ h2 {
     }
 
     .chapter span {
-        font-size: 0.85rem;
+        font-size: 1.2em;
     }
 
     .chapter-select {
-        font-size: 0.85rem;
-    }
-
-    #subject-list {
-        grid-template-columns: 1fr 1fr;
+        font-size: 1em;
     }
 }
 
 @media screen and (max-width: 480px) {
+    .chapter textarea.chapter-notes {
+        width: 100%;  /* Ensure it is responsive */
+        resize: vertical;
+    }
+
     header h1 {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
     }
 
     h2 {
-        font-size: 1.3rem;
+        font-size: 1.9rem;
     }
 
     .subject-card {
@@ -197,34 +177,32 @@ h2 {
     }
 
     .chapter span {
-        font-size: 0.8rem;
+        font-size: 1em;
     }
 
     .chapter-select {
-        font-size: 0.8rem;
+        font-size: 0.85em;
     }
 
     #subject-list {
         grid-template-columns: 1fr;
     }
-
-    .floating-btn {
-        width: 50px;
-        height: 50px;
-    }
 }
+
 /* Styling for Notes Box under each chapter */
 .chapter .notes-container {
     margin-top: 10px;
 }
 
 .chapter textarea.chapter-notes {
-    width: 100%;
-    height: 60px;
+    width: 400px;
+    max-width: 800px;
+    height: 120px;
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 6px;
-    font-size: 0.9rem;
-    resize: none;
+    font-size: 0.9em;
     box-sizing: border-box;
+    position: relative; /* Ensure textarea is a positioned element */
+    resize: both; /* Disable default resize handle */
 }

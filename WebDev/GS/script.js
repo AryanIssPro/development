@@ -1,7 +1,6 @@
 // Import necessary Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
-import { getFirestore, collection, getDocs, setDoc, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { getFirestore, collection, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 // Firebase Configuration
 const firebaseConfig = {
@@ -17,10 +16,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
-// Subjects Data
+// Subjects Data (Static Data for the UI)
 const subjects = {
     History: ["Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Chapter 6", "Chapter 7", "Chapter 8"],
     Geography: ["Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5"],
@@ -56,120 +54,110 @@ Object.entries(subjects).forEach(([subject, chapters]) => {
             </div>
         </div>`
         )
-        .join(" ");
+        .join("");
 
-    subjectDiv.innerHTML = ` 
+    subjectDiv.innerHTML = `
         <h3>${subject}</h3>
         ${chapterList}
     `;
     subjectList.appendChild(subjectDiv);
 });
 
-// Load Progress and Notes from Firestore
-async function loadProgress() {
-    const snapshot = await getDocs(collection(db, "subjects"));
-    snapshot.forEach(docSnap => {
-        const subject = docSnap.id;
-        const chapters = docSnap.data().chapters;
+// Real-Time Firestore Updates
+function loadProgressRealtime() {
+    const subjectsRef = collection(db, "subjects");
 
-        chapters.forEach(chapter => {
+    // Listen for real-time updates
+    onSnapshot(subjectsRef, (snapshot) => {
+        snapshot.forEach(docSnap => {
+            const subject = docSnap.id;
+            const chapters = docSnap.data().chapters;
+
             const subjectDiv = Array.from(document.querySelectorAll(".subject-card"))
                 .find(div => div.querySelector("h3").textContent === subject);
+
             if (subjectDiv) {
-                const chapterDiv = Array.from(subjectDiv.querySelectorAll('.chapter'))
-                    .find(div => div.querySelector('.chapter-title').textContent === chapter.name);
-                if (chapterDiv) {
-                    const selectElement = chapterDiv.querySelector('select');
-                    selectElement.value = chapter.status;
+                chapters.forEach(chapter => {
+                    const chapterDiv = Array.from(subjectDiv.querySelectorAll('.chapter'))
+                        .find(div => div.querySelector('.chapter-title').textContent === chapter.name);
 
-                    const progressBar = chapterDiv.querySelector('.progress');
-                    if (chapter.status === "Not Started") {
-                        progressBar.style.width = "0%";
-                        progressBar.className = "progress not-started";
-                    }
-                    if (chapter.status === "In Progress") {
-                        progressBar.style.width = "50%";
-                        progressBar.className = "progress in-progress";
-                    }
-                    if (chapter.status === "Completed") {
-                        progressBar.style.width = "100%";
-                        progressBar.className = "progress completed";
-                    }
+                    if (chapterDiv) {
+                        // Update status dropdown
+                        const selectElement = chapterDiv.querySelector('select');
+                        if (selectElement) selectElement.value = chapter.status;
 
-                    // Load notes
-                    const notesTextarea = chapterDiv.querySelector('.chapter-notes');
-                    notesTextarea.value = chapter.notes || "";
-                }
+                        // Update progress bar
+                        const progressBar = chapterDiv.querySelector('.progress');
+                        if (progressBar) {
+                            if (chapter.status === "Not Started") {
+                                progressBar.style.width = "0%";
+                                progressBar.className = "progress not-started";
+                            }
+                            if (chapter.status === "In Progress") {
+                                progressBar.style.width = "50%";
+                                progressBar.className = "progress in-progress";
+                            }
+                            if (chapter.status === "Completed") {
+                                progressBar.style.width = "100%";
+                                progressBar.className = "progress completed";
+                            }
+                        }
+
+                        // Update notes
+                        const notesTextarea = chapterDiv.querySelector('.chapter-notes');
+                        if (notesTextarea) notesTextarea.value = chapter.notes || "";
+                    }
+                });
             }
         });
     });
 }
 
-// Save Notes to Firestore
-async function saveChapterNotes(subject, chapter, notes) {
-    const subjectRef = doc(db, "subjects", subject);
-    const docSnap = await getDoc(subjectRef);
-
-    if (docSnap.exists()) {
-        const existingData = docSnap.data();
-        const chapters = existingData.chapters || [];
-
-        const chapterIndex = chapters.findIndex(ch => ch.name === chapter);
-        if (chapterIndex !== -1) {
-            chapters[chapterIndex].notes = notes;
-        } else {
-            chapters.push({ name: chapter, notes });
-        }
-
-        await updateDoc(subjectRef, { chapters });
-    } else {
-        await setDoc(subjectRef, { chapters: [{ name: chapter, notes }] });
-    }
-}
-
-// Update Chapter Progress
+// Update Chapter in Firestore
 async function updateChapter(subject, chapter, status) {
     const subjectRef = doc(db, "subjects", subject);
     const docSnap = await getDoc(subjectRef);
 
     if (docSnap.exists()) {
-        const existingData = docSnap.data();
-        const chapters = existingData.chapters || [];
+        const data = docSnap.data();
+        const chapters = data.chapters || [];
 
-        const chapterIndex = chapters.findIndex(ch => ch.name === chapter);
-        if (chapterIndex !== -1) {
-            chapters[chapterIndex].status = status;
+        const index = chapters.findIndex(ch => ch.name === chapter);
+        if (index !== -1) {
+            chapters[index].status = status;
         } else {
-            chapters.push({ name: chapter, status });
+            chapters.push({ name: chapter, status, notes: "" });
         }
 
-        await setDoc(subjectRef, { chapters }, { merge: true });
+        await setDoc(subjectRef, { chapters });
     } else {
-        await setDoc(subjectRef, { chapters: [{ name: chapter, status }] });
-    }
-
-    // Update the progress bar visually
-    const subjectDiv = Array.from(document.querySelectorAll(".subject-card"))
-        .find(div => div.querySelector("h3").textContent === subject);
-    const chapterDiv = Array.from(subjectDiv.querySelectorAll('.chapter'))
-        .find(div => div.querySelector('.chapter-title').textContent === chapter);
-
-    const progressBar = chapterDiv.querySelector('.progress');
-    if (status === "Not Started") {
-        progressBar.style.width = "0%";
-        progressBar.className = "progress not-started";
-    }
-    if (status === "In Progress") {
-        progressBar.style.width = "50%";
-        progressBar.className = "progress in-progress";
-    }
-    if (status === "Completed") {
-        progressBar.style.width = "100%";
-        progressBar.className = "progress completed";
+        await setDoc(subjectRef, { chapters: [{ name: chapter, status, notes: "" }] });
     }
 }
 
-// Add event listeners to all select elements and note textareas after the page is rendered
+// Save Notes in Firestore
+async function saveChapterNotes(subject, chapter, notes) {
+    const subjectRef = doc(db, "subjects", subject);
+    const docSnap = await getDoc(subjectRef);
+
+    if (docSnap.exists()) {
+        const data = docSnap.data();
+        const chapters = data.chapters || [];
+
+        const index = chapters.findIndex(ch => ch.name === chapter);
+        if (index !== -1) {
+            chapters[index].notes = notes;
+        } else {
+            chapters.push({ name: chapter, notes, status: "Not Started" });
+        }
+
+        await setDoc(subjectRef, { chapters });
+    } else {
+        await setDoc(subjectRef, { chapters: [{ name: chapter, notes, status: "Not Started" }] });
+    }
+}
+
+// Add Event Listeners to UI
 document.addEventListener('DOMContentLoaded', () => {
     const selectElements = document.querySelectorAll(".chapter-select");
     const noteTextareas = document.querySelectorAll(".chapter-notes");
@@ -181,23 +169,27 @@ document.addEventListener('DOMContentLoaded', () => {
             const chapter = selectElement.closest(".chapter").querySelector(".chapter-title").textContent.trim();
             const status = selectElement.value;
 
-            // Update Firestore and UI
+            // Update Firestore
             updateChapter(subject, chapter, status);
         });
     });
 
     noteTextareas.forEach(textarea => {
+        let debounceTimeout;
         textarea.addEventListener('input', (event) => {
             const textareaElement = event.target;
             const subject = textareaElement.closest(".subject-card").querySelector("h3").textContent;
             const chapter = textareaElement.closest(".chapter").querySelector(".chapter-title").textContent.trim();
             const notes = textareaElement.value;
 
-            // Save the notes to Firestore
-            saveChapterNotes(subject, chapter, notes);
+            // Debounce saving notes to Firestore
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(() => {
+                saveChapterNotes(subject, chapter, notes);
+            }, 300);
         });
     });
-    
-    // Load progress and notes on page load
-    loadProgress();
+
+    // Start real-time updates
+    loadProgressRealtime();
 });

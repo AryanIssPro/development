@@ -24,7 +24,7 @@ const db = getFirestore(app);
 document.addEventListener("DOMContentLoaded", async () => {
     const serialNumber = localStorage.getItem("serialNumber");
     if (!serialNumber) {
-        window.location.href = "index.html";
+        window.location.href = "/";
         return;
     }
 

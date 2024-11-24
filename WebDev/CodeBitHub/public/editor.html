@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Editor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <span id="loginInfo">Logged in as: <span id="srnoDisplay"></span></span>
+        <button id="logoutBtn">Logout</button>
+    </div>
+
+    <!-- Code Slots Section -->
+    <div class="code-slots-container">
+        <h3>Your Code Slots:</h3>
+        <div id="codeSlots"></div> <!-- Code slots will be injected here dynamically -->
+        <button id="addCodeSlotBtn">Add Code Slot</button> <!-- Corrected the button ID -->
+    </div>
+
+    <!-- Include your editor.js script as a module -->
+    <script type="module" src="editor.js"></script>
+</body>
+</html>

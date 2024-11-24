@@ -28,6 +28,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
+    // Prevent caching this page
+    window.history.replaceState(null, "", window.location.href);
+
+    // Force page reload from the server, not cache
+    window.addEventListener("pageshow", function (event) {
+        if (event.persisted) {
+            window.location.reload();
+        }
+    });
+
     const srnoDisplay = document.getElementById("srnoDisplay");
     if (srnoDisplay) srnoDisplay.textContent = serialNumber;
 
@@ -35,6 +45,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const codeSlotsContainer = document.getElementById("codeSlots");
 
+    // Listen for real-time updates
     onSnapshot(studentRef, (docSnap) => {
         if (docSnap.exists()) {
             const studentData = docSnap.data();
@@ -46,7 +57,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     function updateOrRenderCodeSlots(codeSlots) {
-        // Create slots if needed, update content otherwise
         while (codeSlotsContainer.children.length < codeSlots.length) {
             const slotIndex = codeSlotsContainer.children.length;
 
@@ -58,12 +68,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             const codeEditor = document.createElement("textarea");
             codeEditor.placeholder = "Write your code here...";
-            codeEditor.dataset.index = slotIndex; // Track the index in the dataset
-            codeEditor.spellcheck = false; // Disable spellcheck
-            codeEditor.autocorrect = "off"; // Disable auto-correct
-            codeEditor.autocapitalize = "none"; // Prevent automatic capitalization
-            codeEditor.setAttribute("autocomplete", "off"); // Disable input suggestions
-
+            codeEditor.dataset.index = slotIndex;
+            codeEditor.spellcheck = false;
+            codeEditor.autocorrect = "off";
+            codeEditor.autocapitalize = "none";
+            codeEditor.setAttribute("autocomplete", "off");
 
             const deleteBtn = document.createElement("button");
             deleteBtn.textContent = "Delete";
@@ -73,7 +82,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             codeSlotDiv.appendChild(heading);
             codeSlotDiv.appendChild(codeEditor);
             codeSlotDiv.appendChild(deleteBtn);
-
             codeSlotsContainer.appendChild(codeSlotDiv);
 
             codeEditor.addEventListener("input", (e) => {
@@ -82,18 +90,16 @@ document.addEventListener("DOMContentLoaded", async () => {
             });
         }
 
-        // Remove extra slots if needed
         while (codeSlotsContainer.children.length > codeSlots.length) {
             codeSlotsContainer.removeChild(codeSlotsContainer.lastChild);
         }
 
-        // Update text areas with current code
         Array.from(codeSlotsContainer.children).forEach((slotDiv, index) => {
             const textArea = slotDiv.querySelector("textarea");
             if (textArea && textArea.value !== codeSlots[index]) {
-                const cursorPosition = textArea.selectionStart; // Save cursor position
+                const cursorPosition = textArea.selectionStart;
                 textArea.value = codeSlots[index];
-                textArea.setSelectionRange(cursorPosition, cursorPosition); // Restore cursor position
+                textArea.setSelectionRange(cursorPosition, cursorPosition);
             }
         });
     }

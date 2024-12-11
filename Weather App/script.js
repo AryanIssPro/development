@@ -1,3 +1,5 @@
+/*logic*/
+
 const searchBtn = document.getElementById('searchBtn');
 const inputBox = document.querySelector('.input-box');
 const weatherBody = document.querySelector('.weather-body');
@@ -35,7 +37,7 @@ async function fetchWeather(location) {
         locationNotFound.style.display = 'none';
 
         // Updating the weather data on the page
-        temperature.innerHTML = `${data.main.temp}<sup>°C</sup>`;
+        temperature.innerHTML = `${data.main.temp}°C`;
         description.innerHTML = data.weather[0].description;
         humidity.innerText = `${data.main.humidity}%`;
         windSpeed.innerText = `${data.wind.speed} km/h`;

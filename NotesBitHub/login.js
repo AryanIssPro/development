@@ -4,18 +4,25 @@ import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/fireb
 
 // Firebase Configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyBk3zPJ24VfM0xbrwPzmNYH-iqf8yX0e9k",
-    authDomain: "codebithub.firebaseapp.com",
-    projectId: "codebithub",
-    storageBucket: "codebithub.firebasestorage.app",
-    messagingSenderId: "996676435419",
-    appId: "1:996676435419:web:95b73c2d909ec8d1a77bfe",
-    measurementId: "G-06KBGW0WDR"
-};
+    apiKey: "AIzaSyD3RRD-GpfCXi3svgvOwfbhEisITws7A9Q",
+    authDomain: "notesbithub.firebaseapp.com",
+    projectId: "notesbithub",
+    storageBucket: "notesbithub.firebasestorage.app",
+    messagingSenderId: "366450711699",
+    appId: "1:366450711699:web:a77fd9dacd6e6b8c8c4166",
+    measurementId: "G-LJXJZXQDN5"
+  };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+// Check if serial number is already saved in localStorage
+const storedSerialNumber = localStorage.getItem("serialNumber");
+if (storedSerialNumber) {
+    // If serialNumber exists in localStorage, redirect to editor page
+    window.location.replace("/NotesBitHub/editor/");
+}
 
 // Handle Login
 document.getElementById("loginBtn").addEventListener("click", async () => {
@@ -24,9 +31,9 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
         const studentRef = doc(db, "students", serialNumber);
         const docSnap = await getDoc(studentRef);
         if (docSnap.exists()) {
-            // Store student info and redirect to code editor
+            // Store student info and redirect to note editor
             localStorage.setItem("serialNumber", serialNumber);
-            window.location.href = "editor.html";
+            window.location.replace("/NotesBitHub/editor/");
         } else {
             document.getElementById("loginError").style.display = "block";
         }
@@ -38,13 +45,26 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
 // Handle Register
 document.getElementById("registerBtn").addEventListener("click", async () => {
     const serialNumber = document.getElementById("newSerialNumber").value.trim();
+    const name = document.getElementById("newName").value.trim();
+    const classEntered = document.getElementById('class').value.replace(/\s+/g, '').toUpperCase();
     if (serialNumber.length === 4) {
         const studentRef = doc(db, "students", serialNumber);
         const docSnap = await getDoc(studentRef);
+
         if (!docSnap.exists()) {
-            await setDoc(studentRef, { serialNumber });
+            // Save both serialNumber and name
+            await setDoc(studentRef, {
+                name: name,
+                serialNumber: parseInt(serialNumber),
+                class: classEntered,
+            });
+
+            // Store serialNumber and name in localStorage
             localStorage.setItem("serialNumber", serialNumber);
-            window.location.href = "editor.html";
+            localStorage.setItem("name", name);
+
+            // Redirect to note editor
+            window.location.href = "/NotesBitHub/editor/";
         } else {
             document.getElementById("registerError").style.display = "block";
         }

@@ -42,9 +42,10 @@ h3{
     margin-bottom: 20px;
 }
 
-input[type="text"] {
+input{
     width: 100%;
     padding: 12px;
+    margin: 5px;
     font-size: 16px;
     border: 2px solid #ddd;
     border-radius: 8px;
@@ -53,7 +54,7 @@ input[type="text"] {
     transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
-input[type="text"]:focus {
+input:focus {
     border-color: #007BFF;
     background-color: #fff;
     outline: none;
@@ -106,7 +107,7 @@ button#showLoginBtn:hover {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-textarea#codeEditor {
+textarea#NoteEditor {
     width: 100%;
     height: 550px;
     padding: 18px;
@@ -119,14 +120,14 @@ textarea#codeEditor {
     transition: border-color 0.3s ease;
 }
 
-textarea#codeEditor:focus {
+textarea#NoteEditor:focus {
     border-color: #007BFF;
     outline: none;
     background-color: #fff;
 }
 
-/* Save Code Button */
-button#saveCodeBtn {
+/* Save Note Button */
+button#saveNoteBtn {
     background-color: #28a745;
     margin-top: 20px;
     transition: background-color 0.3s ease;
@@ -138,12 +139,12 @@ button#saveCodeBtn {
     margin-right: auto;
 }
 
-button#saveCodeBtn:hover {
+button#saveNoteBtn:hover {
     background-color: #218838;
 }
 
-/* Code slot styling */
-.code-slot {
+/* Note slot styling */
+.Note-slot {
     margin: 20px;
     margin-top: 20px;
     padding: 20px;
@@ -153,11 +154,11 @@ button#saveCodeBtn:hover {
     transition: background-color 0.3s ease;
 }
 
-.code-slot:hover {
+.Note-slot:hover {
     background-color: #e0e0e0;
 }
 
-.code-slot textarea {
+.Note-slot textarea {
     width: 98%;
     height: 150px;
     padding: 12px;
@@ -169,7 +170,7 @@ button#saveCodeBtn:hover {
     transition: border-color 0.3s ease;
 }
 
-.code-slot textarea:focus {
+.Note-slot textarea:focus {
     border-color: #007BFF;
     background-color: #fff;
 }
@@ -212,7 +213,7 @@ button.save-btn:hover {
     background-color: #218838;
 }
 /* Add Slot Button */
-#addCodeSlotBtn {
+#addNoteSlotBtn {
     background-color: #b2ff3f;
     padding: 10px 16px;
     margin: 20px;
@@ -225,7 +226,7 @@ button.save-btn:hover {
     transition: background-color 0.3s, transform 0.3s;
 }
 
-#addCodeSlotBtn:hover {
+#addNoteSlotBtn:hover {
     background-color: #99ff00;
     transform: scale(1.05); 
 }
@@ -282,12 +283,12 @@ body, .form-container, .editor-container {
         padding: 10px;
     }
 
-    textarea#codeEditor, .code-slot textarea {
+    textarea#NoteEditor, .Note-slot textarea {
         font-size: 12px;
         padding: 10px;
     }
 
-    .code-slot {
+    .Note-slot {
         margin-top: 15px;
         padding: 15px;
     }

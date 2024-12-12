@@ -15,7 +15,7 @@ const firebaseConfig = {
     messagingSenderId: "366450711699",
     appId: "1:366450711699:web:a77fd9dacd6e6b8c8c4166",
     measurementId: "G-LJXJZXQDN5"
-  };
+};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -23,7 +23,6 @@ const db = getFirestore(app);
 
 document.addEventListener("DOMContentLoaded", async () => {
     const serialNumber = localStorage.getItem("serialNumber");
-    const name = localStorage.getItem("name");
     if (!serialNumber) {
         window.location.href = "../";
         return;
@@ -40,13 +39,28 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     const srnoDisplay = document.getElementById("srnoDisplay");
-    if (srnoDisplay) srnoDisplay.textContent = name;
-
+    const NoteSlotsContainer = document.getElementById("NoteSlots");
     const studentRef = doc(db, "students", serialNumber);
 
-    const NoteSlotsContainer = document.getElementById("NoteSlots");
+    try {
+        // Fetch the student's document from Firestore
+        const docSnap = await getDoc(studentRef);
+        if (docSnap.exists()) {
+            const studentData = docSnap.data();
+            const studentName = studentData.name || "Unknown Student";
+            if (srnoDisplay) srnoDisplay.textContent = studentName;
 
-    // Listen for real-time updates
+            // Render initial NoteSlots
+            const NoteSlots = studentData.NoteSlots || [];
+            updateOrRenderNoteSlots(NoteSlots);
+        } else {
+            console.error("Student document does not exist.");
+        }
+    } catch (error) {
+        console.error("Error fetching student document:", error);
+    }
+
+    // Real-time updates for notes
     onSnapshot(studentRef, (docSnap) => {
         if (docSnap.exists()) {
             const studentData = docSnap.data();
@@ -57,6 +71,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
+    // Function to update or render NoteSlots
     function updateOrRenderNoteSlots(NoteSlots) {
         while (NoteSlotsContainer.children.length < NoteSlots.length) {
             const slotIndex = NoteSlotsContainer.children.length;
@@ -105,35 +120,51 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
+    // Add new note slot
     const addNoteSlotBtn = document.getElementById("addNoteSlotBtn");
     if (addNoteSlotBtn) {
         addNoteSlotBtn.addEventListener("click", async () => {
-            const docSnap = await getDoc(studentRef);
-            const studentData = docSnap.data();
-            const updatedNoteSlots = studentData.NoteSlots ? [...studentData.NoteSlots, ""] : [""];
+            try {
+                const docSnap = await getDoc(studentRef);
+                const studentData = docSnap.data();
+                const updatedNoteSlots = studentData.NoteSlots ? [...studentData.NoteSlots, ""] : [""];
 
-            await updateDoc(studentRef, { NoteSlots: updatedNoteSlots });
+                await updateDoc(studentRef, { NoteSlots: updatedNoteSlots });
+            } catch (error) {
+                console.error("Error adding note slot:", error);
+            }
         });
     }
 
+    // Update a note slot
     async function updateNoteSlot(index, Note) {
-        const docSnap = await getDoc(studentRef);
-        const studentData = docSnap.data();
-        const updatedNoteSlots = [...(studentData.NoteSlots || [])];
-        updatedNoteSlots[index] = Note;
+        try {
+            const docSnap = await getDoc(studentRef);
+            const studentData = docSnap.data();
+            const updatedNoteSlots = [...(studentData.NoteSlots || [])];
+            updatedNoteSlots[index] = Note;
 
-        await updateDoc(studentRef, { NoteSlots: updatedNoteSlots });
+            await updateDoc(studentRef, { NoteSlots: updatedNoteSlots });
+        } catch (error) {
+            console.error("Error updating note slot:", error);
+        }
     }
 
+    // Delete a note slot
     async function deleteNoteSlot(index) {
-        const docSnap = await getDoc(studentRef);
-        const studentData = docSnap.data();
-        const updatedNoteSlots = [...(studentData.NoteSlots || [])];
-        updatedNoteSlots.splice(index, 1);
+        try {
+            const docSnap = await getDoc(studentRef);
+            const studentData = docSnap.data();
+            const updatedNoteSlots = [...(studentData.NoteSlots || [])];
+            updatedNoteSlots.splice(index, 1);
 
-        await updateDoc(studentRef, { NoteSlots: updatedNoteSlots });
+            await updateDoc(studentRef, { NoteSlots: updatedNoteSlots });
+        } catch (error) {
+            console.error("Error deleting note slot:", error);
+        }
     }
 
+    // Logout button functionality
     const logoutBtn = document.getElementById("logoutBtn");
     if (logoutBtn) {
         logoutBtn.addEventListener("click", () => {
@@ -141,5 +172,4 @@ document.addEventListener("DOMContentLoaded", async () => {
             window.location.replace("../");
         });
     }
-
 });

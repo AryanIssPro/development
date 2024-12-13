@@ -160,9 +160,9 @@ button#saveNoteBtn:hover {
 
 .Note-slot textarea {
     width: 98%;
-    height: 150px;
+    height: 500px;
     padding: 12px;
-    font-size: 14px;
+    font-size: 16px;
     border: 2px solid #ddd;
     border-radius: 8px;
     resize: vertical;
@@ -283,7 +283,7 @@ footer p{
 /* For responsiveness */
 @media (max-width: 800px) {
     .form-container, .editor-container {
-        width: 90%;
+        width: 80%;
     }
 }
 
@@ -294,8 +294,8 @@ footer p{
     }
 
     textarea#NoteEditor, .Note-slot textarea {
-        font-size: 12px;
-        padding: 10px;
+        font-size: 15px;
+        padding: 2px;
     }
 
     .Note-slot {

@@ -270,6 +270,16 @@ body, .form-container, .editor-container {
     box-sizing: border-box;
 }
 
+footer{
+    background-color: #ddd;
+}
+
+footer p{
+    margin: 0px;
+    padding: 25px;
+    text-align: center;
+}
+
 /* For responsiveness */
 @media (max-width: 800px) {
     .form-container, .editor-container {

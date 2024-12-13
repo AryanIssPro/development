@@ -21,7 +21,7 @@ const db = getFirestore(app);
 const storedSerialNumber = localStorage.getItem("serialNumber");
 if (storedSerialNumber) {
     // If serialNumber exists in localStorage, redirect to editor page
-    window.location.replace("/editor");
+    window.location.replace("editor/index.html");
 }
 
 // Handle Login
@@ -33,7 +33,7 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
         if (docSnap.exists()) {
             // Store student info and redirect to note editor
             localStorage.setItem("serialNumber", serialNumber);
-            window.location.replace("/editor");
+            window.location.replace("editor/index.html");
         } else {
             document.getElementById("loginError").style.display = "block";
         }
@@ -64,7 +64,7 @@ document.getElementById("registerBtn").addEventListener("click", async () => {
             localStorage.setItem("name", name);
 
             // Redirect to note editor
-            window.location.href = "/editor";
+            window.location.href = "editor/index.html";
         } else {
             document.getElementById("registerError").style.display = "block";
         }

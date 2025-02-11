@@ -1,7 +1,7 @@
 const { spawn } = require('child_process');
 
 // Path to your script
-const scriptPath = 'C:\\Users\\aryan\\GitHub\\development\\BotAttack\\Bot2.js';
+const scriptPath = '/workspaces/development/BotAttack/Bot2.js';
 const minDelay = 3500; // minimum delay in milliseconds
 const maxDelay = 3500; // maximum delay in milliseconds
 

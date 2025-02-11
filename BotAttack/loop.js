@@ -2,7 +2,7 @@ const { spawn } = require('child_process');
 
 // Path to your script
 const scriptPath = '/workspaces/development/BotAttack/Bot2.js';
-const minDelay = 3500; // minimum delay in milliseconds
+const minDelay = 3000; // minimum delay in milliseconds
 const maxDelay = 3500; // maximum delay in milliseconds
 
 // ANSI escape code for red text

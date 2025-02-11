@@ -2,30 +2,53 @@ const mineflayer = require('mineflayer');
 
 function createFakePlayer() {
     const bot = mineflayer.createBot({
-        host: 'play.badmosmc.fun',
+        host: '142.93.219.201',
         port: 25565,
-        username: 'FakeBot' + Math.random().toString(36).substring(7),
+        username: 'blalaal',
         version: '1.21.1'
     });
 
-    bot.on('spawn', () => {
-        console.log('Fake player joined');
-        
-        // Register the bot with a delay
-        setTimeout(() => {
-            bot.chat('/register iamhacker');
-        }, 10000); // Delay of 3 seconds before registration
+    bot.on('spawn', async () => {
+        console.log('Bot has spawned!');
 
-        // Send "hi" every 10 seconds
-        setInterval(() => {
-            bot.chat('hi');
-        }, 10000); // 10 seconds interval
+        // Register and login
+
+        // Move 2 blocks forward
+        bot.setControlState('forward', true);
+        await wait(100);
+        bot.setControlState('forward', false);
+
+        // Connect to survival server
+        await wait(5000);
+        bot.chat('/server survival');
+    });
+
+    bot.on('message', (message) => {
+        console.log(message.toString());
+
+        // Check if the PvPManager message appears
+        if (message.toString().includes('Welcome! You are protected against PvP for 5 minutes')) {
+            console.log('connected to survival')
+        }
+
     });
 
     bot.on('error', err => {
         console.log('Error:', err);
     });
+    
+    bot.on('end', () => {
+        console.log('Bot has disconnected.');
+    });
+
+    bot.on('kicked', (reason) => {
+        console.log('Kicked:', reason);
+    });
+    
 }
 
-// Continuously spawn fake players
-setInterval(createFakePlayer, 10000);
+function wait(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+createFakePlayer();

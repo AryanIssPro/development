@@ -41,9 +41,9 @@ function createBot() {
 
         // Check if the PvPManager message appears
         if (message.toString().includes('Welcome! You are protected against PvP for 5 minutes')) {
-            //bot.chat(`/pay ${playerName} 1000`);
+            bot.chat(`/pay ${playerName} 1000`);
             //bot.chat('Hahaha, this server is boomed! Hahaha, this server is boomed! Hahaha, this server is boomed! Hahaha, this server is boomed! Hahaha, this server is boomed! Hahaha, this server is boomed! Hahaha, this server is boomed! Hahaha, this server is boomed! Hahaha, this server is boomed! Hahaha, this server is boomed! Hahaha, this server is boomed! Hahaha, this server is boomed! Hahaha, this server is boomed! Hahaha, this server is boomed! Hahaha, this server is boomed! Hahaha, this server is boomed! Hahaha, this server is boomed! Hahaha, this server is boomed! Hahaha, this server is boomed! Hahaha, this server is boomed!');
-            bot.chat('SaadX90 is the best developer!');
+            //bot.chat('SaadX90 is the best developer!');
         }
 
     });

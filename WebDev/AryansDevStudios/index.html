@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AryansDevStudios: Game Showcase</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General Styles */
+        :root {
+            --main-bg: #0f172a;
+            --secondary-bg: #1e293b;
+            --highlight: #f59e0b;
+            --text-light: #cbd5e1;
+            --text-dark: #ffffff;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--main-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+    
+        header {
+            background: var(--secondary-bg);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: var(--highlight);
+        }
+
+        header h2 {
+            margin-top: 15px;
+            margin-bottom: 0px;
+            font-size: 1.5em;
+            color: var(--highlight);
+        }
+
+        header p {
+            margin: 0px;
+            color: var(--text-light);
+            font-size: 1.2em;
+        }
+
+        .container {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .game {
+            margin-bottom: 40px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            background: var(--secondary-bg);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .game:hover {
+            transform: scale(1.025);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .game img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .game-content {
+            padding: 20px;
+        }
+
+        .game-content h2 {
+            margin-top: 0;
+            color: var(--highlight);
+            font-size: 2em;
+        }
+
+        .game-content p {
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .download-buttons a {
+            flex: 1;
+            max-width: 200px;
+            text-align: center;
+            padding: 10px 15px;
+            background: var(--highlight);
+            color: var(--secondary-bg);
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .download-buttons a:hover {
+            background: #eab308;
+            transform: translateY(-3px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: var(--secondary-bg);
+            margin-top: 20px;
+            color: var(--text-light);
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            header p {
+                font-size: 1em;
+            }
+
+            .game-content h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>AryansDevStudios</h1>
+        <h2>Game Showcase</h2>
+        <p>Explore my creations and download them today!</p>
+    </header>
+
+    <main class="container">
+        <!-- Game 1 -->
+        <section class="game">
+            <img src="rushparkour.png" alt="RushParkour Game Cover">
+            <div class="game-content">
+                <h2>RushParkour</h2>
+                <p>RushParkour is an exciting side-scroller platform game. Leap from one platform to another and test your skills! Available for Windows.</p>
+                <div class="download-buttons">
+                    <a href="https://drive.google.com/uc?export=download&id=RUSH_PARKOUR_FILE_ID" target="_blank" aria-label="Download RushParkour for Windows">Download for Windows</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game 2 -->
+        <section class="game">
+            <img src=".png" alt="MansionMystery Game Cover">
+            <div class="game-content">
+                <h2>MansionMystery</h2>
+                <p>Dive into the world of horror! Find the glowing red ball and eliminate the creature stalking you in a haunted mansion. Available for Windows and Android.</p>
+                <div class="download-buttons">
+                    <a href="https://drive.google.com/uc?export=download&id=MANSION_MYSTERY_WIN_ID" target="_blank" aria-label="Download MansionMystery for Windows">Download for Windows</a>
+                    <a href="https://drive.google.com/uc?export=download&id=MANSION_MYSTERY_APK_ID" target="_blank" aria-label="Download MansionMystery for Android">Download for Android</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game 3 -->
+        <section class="game">
+            <img src="mazemaster.png" alt="Maze Master Game Cover">
+            <div class="game-content">
+                <h2>Maze Master</h2>
+                <p>Step into the ultimate 3D maze adventure. Solve challenging mazes and find your way to the end! Available for Windows and Android.</p>
+                <div class="download-buttons">
+                    <a href="https://drive.google.com/uc?export=download&id=MAZE_MASTER_WIN_ID" target="_blank" aria-label="Download Maze Master for Windows">Download for Windows</a>
+                    <a href="https://drive.google.com/uc?export=download&id=MAZE_MASTER_APK_ID" target="_blank" aria-label="Download Maze Master for Android">Download for Android</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Aryan's Development. All rights reserved.</p>
+    </footer>
+</body>
+</html>

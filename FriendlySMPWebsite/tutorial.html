@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friendly SMP - Tutorial</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function toggleOptionalSteps() {
+            var optionalSection = document.getElementById("optionalSteps");
+            optionalSection.style.display = optionalSection.style.display === "none" ? "block" : "none";
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Start Your Minecraft Server</h1>
+        <p>Follow these simple steps:</p>
+        
+        <div class="info-box">
+            <h2>1. Log in to GitHub</h2>
+            <p>Go to <a href="https://github.com" target="_blank">GitHub</a> and sign in.</p>
+            <img src="images/github-login.png" alt="GitHub login screen">
+        </div>
+        
+        <div class="info-box">
+            <h2>2. Open GitHub Codespace</h2>
+            <p>Go to your repository and start a Codespace.</p>
+            <img src="images/codespace.png" alt="GitHub Codespace interface">
+        </div>
+        
+        <div class="info-box">
+            <h2>3. Start the Server</h2>
+            <p>In the terminal, type:</p>
+            <code>./start.sh</code>
+            <img src="images/terminal-command.png" alt="Terminal command to start server">
+        </div>
+        
+        <div class="info-box">
+            <h2>4. Connect to Minecraft</h2>
+            <p>Use the IP on the main site to join the server.</p>
+        </div>
+        
+        <button class="button" onclick="toggleOptionalSteps()">Show Extra Steps</button>
+        
+        <div id="optionalSteps" style="display: none;">
+            <div class="info-box">
+                <h2>Optional: Use Crafty</h2>
+                <p>Go to the Crafty panel and log in.</p>
+                <img src="images/crafty-login.png" alt="Crafty login screen">
+            </div>
+            
+            <div class="info-box">
+                <h2>Optional: Use Tailscale</h2>
+                <p>Download <a href="https://tailscale.com/download" target="_blank">Tailscale</a>, install it, and log in.</p>
+                <img src="images/tailscale-login.png" alt="Tailscale login screen">
+            </div>
+            
+            <div class="info-box">
+                <h2>Optional: Install Voice Chat</h2>
+                <p>Download and install the voice chat mod for your Minecraft version.</p>
+                <img src="images/voicechat-setup.png" alt="Voice chat plugin setup">
+            </div>
+        </div>
+        
+        <a href="index.html" class="button">Back to Main Site</a>
+    </div>
+</body>
+</html>

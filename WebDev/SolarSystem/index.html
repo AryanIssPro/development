@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8">
+    <title>The Solar System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Pre:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #0d1b32;
+            color: #ffffff;
+            line-height: 1.6;
+            padding: 0px;
+            margin: 0px;
+            text-shadow:  2px 2px 3px rgba(0, 0, 0, 0.7);
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(252, 70, 107, 0.8), rgba(63, 94, 251, 0.8));
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+            font-family: 'Edu Au vic Wa NT Pre';
+        }
+
+        header p {
+            font-size: 1.2em;
+            margin-top: 5px;
+        }
+
+        #solar-system-image {
+            background-color: rgba(255, 255, 255, 0.1);
+            max-width: 100%;
+            height: auto;
+            margin: 30px auto;
+            padding: 12px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        #solar-system-image:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(390px, 2fr));
+            gap: 50px;
+        }
+
+        .planet-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
+        }
+
+        .planet-card:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+        }
+
+        .planet-card h3 {
+            margin: 0;
+            font-size: 2em;
+            background: linear-gradient(to right, #6a82fb, #fc5c7d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: none;
+        }
+
+        .planet-card:hover h3 {
+            background: linear-gradient(to left, #6a82fb, #fc5c7d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .planet-card p {
+            margin: 8px;
+            font-size: 1.1em;
+        }
+
+        .planet-card img {
+            width:100%; 
+            border-radius: 15px;
+        }
+
+        #quiz-button {
+            margin: 20px auto;
+            display: block;
+            background-color: #3b82f6;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.7);
+            box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.7);
+            transition: background-color 0.3s, transform 0.3s ease, box-shadow 0.3s ease;
+            font-size: 1.2em;
+        }
+
+        #quiz-button:hover {
+            background-color: #fc5c7d;
+            transform: translateY(-5px);
+        }
+
+        footer {
+            background: linear-gradient(to bottom, #002aff, #000c47);
+            color: #ffffff;
+            text-align: center;
+            padding: 30px;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.7);
+        }
+
+        footer p {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>The Solar System</h1>
+        <p>Discover the planets of our solar system</p>
+    </header>
+    <img id="solar-system-image" src="SolarSystem.png" alt="Solar System Image" width=90%>
+    <main>
+        <!-- Mercury Card -->
+        <div class="planet-card">
+            <img src="Mercury.jpeg" alt="Mercury">
+            <h3>Mercury</h3>
+            <p><strong>Gravity:</strong> 3.7 m/s²</p>
+            <p><strong>Diameter:</strong> 4,880 km</p>
+            <p><strong>Mass:</strong> 3.3 x 10<sup>23</sup> kg</p>
+            <p><strong>Position:</strong> 1st from the Sun</p>
+            <p><strong>Type:</strong> Rocky planet</p>
+            <p><strong>Atmosphere:</strong> Very thin, mostly oxygen.</p>
+            <p><strong>Special Features:</strong> Smallest planet; extreme temperature changes; no moons.</p>
+            <p><strong>Rotation Period:</strong> 59 Earth days</p>
+            <p><strong>Revolution Period:</strong> 88 Earth days</p>
+        </div>
+
+        <!-- Venus Card -->
+        <div class="planet-card">
+            <img src="Venus.jpeg" alt="Venus">
+            <h3>Venus</h3>
+            <p><strong>Gravity:</strong> 8.87 m/s²</p>
+            <p><strong>Diameter:</strong> 12,104 km</p>
+            <p><strong>Mass:</strong> 4.87 x 10<sup>24</sup> kg</p>
+            <p><strong>Position:</strong> 2nd from the Sun</p>
+            <p><strong>Type:</strong> Rocky planet</p>
+            <p><strong>Atmosphere:</strong> Thick, mostly carbon dioxide.</p>
+            <p><strong>Special Features:</strong> Hottest planet; known for its thick clouds; no moons.</p>
+            <p><strong>Rotation Period:</strong> 243 Earth days (retrograde)</p>
+            <p><strong>Revolution Period:</strong> 225 Earth days</p>
+        </div>
+
+        <!-- Earth Card -->
+        <div class="planet-card">
+            <img src="Earth.png" alt="Earth">
+            <h3>Earth</h3>
+            <p><strong>Gravity:</strong> 9.8 m/s²</p>
+            <p><strong>Diameter:</strong> 12,742 km</p>
+            <p><strong>Mass:</strong> 5.97 x 10<sup>24</sup> kg</p>
+            <p><strong>Position:</strong> 3rd from the Sun</p>
+            <p><strong>Type:</strong> Rocky planet</p>
+            <p><strong>Atmosphere:</strong> Nitrogen and oxygen.</p>
+            <p><strong>Special Features:</strong> Supports life; has liquid water; diverse ecosystems.</p>
+            <p><strong>Rotation Period:</strong> 24 hours</p>
+            <p><strong>Revolution Period:</strong> 365.25 days</p>
+        </div>
+
+        <!-- Mars Card -->
+        <div class="planet-card">
+            <img src="Mars.jpeg" alt="Mars">
+            <h3>Mars</h3>
+            <p><strong>Gravity:</strong> 3.71 m/s²</p>
+            <p><strong>Diameter:</strong> 6,779 km</p>
+            <p><strong>Mass:</strong> 6.39 x 10<sup>23</sup> kg</p>
+            <p><strong>Position:</strong> 4th from the Sun</p>
+            <p><strong>Type:</strong> Rocky planet</p>
+            <p><strong>Atmosphere:</strong> Thin, mostly carbon dioxide.</p>
+            <p><strong>Special Features:</strong> Known as the Red Planet; has the largest volcano and canyon in the solar system; evidence of past water.</p>
+            <p><strong>Rotation Period:</strong> 24.6 hours</p>
+            <p><strong>Revolution Period:</strong> 687 Earth days</p>
+        </div>
+
+        <!-- Jupiter Card -->
+        <div class="planet-card">
+            <img src="Jupiter.png" alt="Jupiter">
+            <h3>Jupiter</h3>
+            <p><strong>Gravity:</strong> 24.79 m/s²</p>
+            <p><strong>Diameter:</strong> 139,820 km</p>
+            <p><strong>Mass:</strong> 1.90 x 10<sup>27</sup> kg</p>
+            <p><strong>Position:</strong> 5th from the Sun</p>
+            <p><strong>Type:</strong> Gas giant</p>
+            <p><strong>Atmosphere:</strong> Mostly hydrogen and helium.</p>
+            <p><strong>Special Features:</strong> Largest planet; famous for its Great Red Spot; has over 75 moons.</p>
+            <p><strong>Rotation Period:</strong> 9.9 hours</p>
+            <p><strong>Revolution Period:</strong> 11.86 Earth years</p>
+        </div>
+
+        <!-- Saturn Card -->
+        <div class="planet-card">
+            <img src="Saturn.png" alt="Saturn">
+            <h3>Saturn</h3>
+            <p><strong>Gravity:</strong> 10.44 m/s²</p>
+            <p><strong>Diameter:</strong> 116,460 km</p>
+            <p><strong>Mass:</strong> 5.68 x 10<sup>26</sup> kg</p>
+            <p><strong>Position:</strong> 6th from the Sun</p>
+            <p><strong>Type:</strong> Gas giant</p>
+            <p><strong>Atmosphere:</strong> Mostly hydrogen and helium.</p>
+            <p><strong>Special Features:</strong> Known for its stunning ring system; has over 80 moons.</p>
+            <p><strong>Rotation Period:</strong> 10.7 hours</p>
+            <p><strong>Revolution Period:</strong> 29.46 Earth years</p>
+        </div>
+
+        <!-- Uranus Card -->
+        <div class="planet-card">
+            <img src="Uranus.png" alt="Uranus">
+            <h3>Uranus</h3>
+            <p><strong>Gravity:</strong> 8.69 m/s²</p>
+            <p><strong>Diameter:</strong> 50,724 km</p>
+            <p><strong>Mass:</strong> 8.68 x 10<sup>25</sup> kg</p>
+            <p><strong>Position:</strong> 7th from the Sun</p>
+            <p><strong>Type:</strong> Ice giant</p>
+            <p><strong>Atmosphere:</strong> Hydrogen, helium, and methane.</p>
+            <p><strong>Special Features:</strong> Rotates on its side; has rings and 27 known moons.</p>
+            <p><strong>Rotation Period:</strong> 17.2 hours</p>
+            <p><strong>Revolution Period:</strong> 84 Earth years</p>
+        </div>
+
+        <!-- Neptune Card -->
+        <div class="planet-card">
+            <img src="Neptune.png" alt="Neptune">
+            <h3>Neptune</h3>
+            <p><strong>Gravity:</strong> 11.15 m/s²</p>
+            <p><strong>Diameter:</strong> 49,244 km</p>
+            <p><strong>Mass:</strong> 1.02 x 10<sup>26</sup> kg</p>
+            <p><strong>Position:</strong> 8th from the Sun</p>
+            <p><strong>Type:</strong> Ice giant</p>
+            <p><strong>Atmosphere:</strong> Hydrogen, helium, and methane.</p>
+            <p><strong>Special Features:</strong> Farthest planet; known for strong winds; has 14 moons.</p>
+            <p><strong>Rotation Period:</strong> 16.1 hours</p>
+            <p><strong>Revolution Period:</strong> 165 Earth years</p>
+        </div>
+    </main>
+
+    <!-- Quiz Button -->
+    <button id="quiz-button" onclick="window.open('quiz.html')">Take the Quiz!</button>
+    <footer>
+        <p>&copy; 2024 The Solar System Exhibition</p>
+    </footer>
+
+</body>
+</html>

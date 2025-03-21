@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoteBitHub Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="form-container" id="loginForm">
+        <h1>Welcome to NoteBitHub</h1>
+        <h2>Login</h2>
+        <div class="input-container">
+            <input type="text" id="serialNumber" placeholder="Enter your 4-digit Serial Number">
+        </div>
+        <button id="loginBtn">Login</button>
+        <p class="error-message" id="loginError">Invalid Serial Number. Please try again.</p>
+        <p>Don't have an account? <button id="showRegisterBtn">Register here</button></p>
+    </div>
+
+    <div class="form-container" id="registerForm" style="display: none;">
+        <h2>Register</h2>
+        <div class="input-container">
+            <input type="text" id="newName" placeholder="Enter your Name">
+            <input type="text" id="class" placeholder="Enter your Class">
+            <input type="number" id="newSerialNumber" min="1000" max="9999" placeholder="Enter your 4-digit Sr. No.">
+        </div>
+        <button id="registerBtn">Register</button>
+        <p class="error-message" id="registerError">Serial Number already exists. Please try again.</p>
+        <p>Already have an account? <button id="showLoginBtn">Login here</button></p>
+    </div>
+
+    <footer>
+        <p>Created by Aryan Gupta</p>
+    </footer>
+
+    <!-- Include Firebase JS SDK -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js"></script>
+
+    <!-- Include your login.js script -->
+    <script type="module" src="login.js"></script>
+</body>
+</html>

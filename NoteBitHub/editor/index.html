@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoteBitHub Editor</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <span id="loginInfo">Logged in as: <span id="srnoDisplay"></span></span>
+        <button id="logoutBtn">Logout</button>
+    </div>
+    
+
+    <!-- Note Slots Section -->
+    <div class="Not-slots-container">
+        <h3>Your Notes:</h3>
+        <div id="NoteSlots"></div> <!-- Note slots will be injected here dynamically -->
+        <button id="addNoteSlotBtn">Add Note Slot</button> <!-- Button for adding Note slots -->
+    </div>
+
+    <footer>
+        <p>Created by Aryan Gupta</p>
+    </footer>
+
+    <!-- Include your editor.js script as a module -->
+    <script type="module" src="editor.js"></script>
+</body>
+</html>

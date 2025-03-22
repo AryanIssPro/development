@@ -1,64 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  <title>Friendly SMP Website</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>Welcome to Friendly SMP</h1>
-  <h4>Follow the tutorial to start the server <a href="tutorial.html" target="_blank">here</a>.</h4>
-  <button id="startServer">Start Server</button>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+        <title>Friendly SMP Website</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
 
-  <!-- Server Details Section -->
+    <body>
+        <h1>Welcome to Friendly SMP</h1>
+        <h4>Follow the tutorial to start the server <a href="tutorial.html" target="_blank">here</a>.</h4>
+        <button id="startServer">Start Server</button>
 
+        <div class="container">
+            <h2>Server Status</h2>
+            <div class="info-box">
+                <span id="javaStatus" class="status offline" style="font-size:2rem;">Checking...</span>
+            </div>
+            <div class="info-box">
+                <h3>Active Players</h3>
+                <div id="javaPlayerList" style="display: none;">
+                    <span id="javaPlayers">0</span>
+                </div>
+            </div>
+        </div>
 
-  <!-- Big Server Status Section (Java only) -->
-  <div class="container">
-    <h2>Server Status</h2>
-    <div class="info-box">
-        <span id="javaStatus" class="status offline" style="font-size:2rem;">Checking...</span>
-    </div>
-    <div class="info-box">
-        <h3 style="margin-top: 10px;">Active Plavers</h3>
-        <div id="javaPlayerList" style="display: none;"><span id="javaPlayers">0</span></div>
-    </div>
-      </div>
-  
-  <div class="container">
-    <h2>Server Details</h2>
-    <div class="info-box">
-      <div class="server-info"><strong>Java IP:</strong> <span id="javaIP">Loading...</span></div>
-      <div class="server-info"><strong>Bedrock IP:</strong> <span id="bedrockIP">Loading...</span></div>
-      <div class="server-info"><strong>Bedrock Port:</strong> <span id="bedrockPort">Loading...</span></div>
-    </div>
-    <div class="buttons">
-      <button id="craftyPanel">Crafty Control Panel</button>
-    </div>
-  </div>
+        <div class="container">
+            <h2>Server Details</h2>
+            <div class="info-box">
+                <div class="server-info">
+                    <strong>Java IP:</strong> <span id="javaIP">Loading...</span>
+                    <button class="copy-btn" onclick="copyText('javaIP')">📋</button>
+                </div>
+                <div class="server-info">
+                    <strong>Bedrock IP:</strong> <span id="bedrockIP">Loading...</span>
+                    <button class="copy-btn" onclick="copyText('bedrockIP')">📋</button>
+                </div>
+                <div class="server-info">
+                    <strong>Bedrock Port:</strong> <span id="bedrockPort">Loading...</span>
+                    <button class="copy-btn" onclick="copyText('bedrockPort')">📋</button>
+                </div>
+            </div>
+            <div class="buttons">
+                <button id="mapLink" onclick="window.open('http://job-cohen.gl.at.ply.gg:3790/', '_blank')">View Live Map</button>
+                <button id="craftyPanel">Crafty Control Panel</button>
+            </div>
+        </div>
 
-  <!-- Credentials Section -->
-  <div id="CredsInfoFrame" class="container">
-    <h3>Login Credentials</h3>
-    <button id="toggleCredentials">Show Credentials</button>
-    <div id="credentials" class="info-box" style="display: none;">
-      <div class="server-info"><strong>GitHub Username:</strong> <span id="githubUser">Hidden</span></div>
-      <div class="server-info"><strong>GitHub Password:</strong> <span id="githubPass">Hidden</span></div>
-      <div class="server-info"><strong>Crafty Username:</strong> <span id="craftyUser">Hidden</span></div>
-      <div class="server-info"><strong>Crafty Password:</strong> <span id="craftyPass">Hidden</span></div>
-    </div>
-  </div>
+        <div id="CredsInfoFrame" class="container">
+            <h3>Login Credentials</h3>
+            <button id="toggleCredentials">Show Credentials</button>
+            <div id="credentials" class="info-box" style="display: none;">
+                <div class="server-info"><strong>GitHub Username:</strong> <span id="githubUser">Hidden</span></div>
+                <div class="server-info"><strong>GitHub Password:</strong> <span id="githubPass">Hidden</span></div>
+                <div class="server-info"><strong>Crafty Username:</strong> <span id="craftyUser">Hidden</span></div>
+                <div class="server-info"><strong>Crafty Password:</strong> <span id="craftyPass">Hidden</span></div>
+            </div>
+        </div>
 
-  <!-- Map Section (map toggle and iframe remain) -->
-  <div id="mapContainer" class="map-frame">
-    <h3>Live Map</h3>
-    <button id="toggleMap">Show Map</button>
-    <iframe id="mapFrame" src="" width="100%" height="1000px" frameborder="0" style="display: none;"></iframe>
-    <button id="mapLink" style="display: none;">Open in Browser</button>
-  </div>
+        <div class="theme-toggle">
+            <button id="toggleTheme">Switch to Light Theme</button>
+        </div>
 
-  <script src="script.js"></script>
-</body>
+        <script src="script.js"></script>
+    </body>
 </html>

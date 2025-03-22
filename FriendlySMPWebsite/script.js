@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
       credsButton.textContent = credentialsVisible ? "Hide Credentials" : "Show Credentials";
 
       if (credentialsVisible) {
-        document.getElementById("githubUser").textContent = "aryan0106gupta@gmail.com";
+        document.getElementById("githubUser").textContent = "anju2590gupta@gmail.com";
         document.getElementById("githubPass").textContent = "xh6fknwj0f@";
         document.getElementById("craftyUser").textContent = "guest";
         document.getElementById("craftyPass").textContent = "CraftyGuest";

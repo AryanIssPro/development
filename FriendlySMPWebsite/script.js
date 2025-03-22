@@ -1,4 +1,4 @@
-let codespaceName = "glowing-space-invention-vj5wwrvr7qghx994";
+let codespaceName = "zany-enigma-6xpww5g5j5jfx64j";
 let updateInterval;
 
 function updateLinks() {
@@ -8,18 +8,18 @@ function updateLinks() {
     document.getElementById('craftyPanel').onclick = () => window.open(`https://${codespaceName}-8443.app.github.dev`, '_blank');
   }
   if (document.getElementById('javaIP')) {
-    document.getElementById('javaIP').textContent = "limited-grave.gl.joinmc.link";
+    document.getElementById('javaIP').textContent = "buying-hz.gl.joinmc.link";
   }
   if (document.getElementById('bedrockIP')) {
-    document.getElementById('bedrockIP').textContent = "door-ranks.gl.at.ply.gg";
+    document.getElementById('bedrockIP').textContent = "transportation-carb.gl.at.ply.gg";
   }
   if (document.getElementById('bedrockPort')) {
-    document.getElementById('bedrockPort').textContent = "2347";
+    document.getElementById('bedrockPort').textContent = "1398";
   }
 }
 
 function checkServerStatus() {
-  fetch("https://api.mcsrvstat.us/2/limited-grave.gl.joinmc.link")
+  fetch("https://api.mcsrvstat.us/2/buying-hz.gl.joinmc.link")
     .then(response => response.json())
     .then(data => {
       let javaStatus = document.getElementById('javaStatus');
@@ -66,32 +66,6 @@ function checkServerStatus() {
         javaPlayerList.style.display = "none";
       }
     });
-
-  fetch("https://api.mcsrvstat.us/bedrock/2/door-ranks.gl.at.ply.gg:2347")
-    .then(response => response.json())
-    .then(data => {
-      let bedrockStatus = document.getElementById('bedrockStatus');
-      let bedrockPlayerList = document.getElementById('bedrockPlayerList');
-      let bedrockPlayersSpan = document.getElementById('bedrockPlayers');
-
-      if (data.online) {
-        bedrockStatus.textContent = "Online";
-        bedrockStatus.classList.add('online');
-        bedrockStatus.classList.remove('offline');
-
-        if (data.players && data.players.online > 0) {
-          bedrockPlayerList.style.display = "block";
-          bedrockPlayersSpan.textContent = data.players.list ? data.players.list.join(", ") : "Unknown Players";
-        } else {
-          bedrockPlayerList.style.display = "none";
-        }
-      } else {
-        bedrockStatus.textContent = "Offline";
-        bedrockStatus.classList.add('offline');
-        bedrockStatus.classList.remove('online');
-        bedrockPlayerList.style.display = "none";
-      }
-    });
 }
 
 function startUpdatingStatus() {
@@ -122,10 +96,10 @@ document.addEventListener("DOMContentLoaded", function () {
       credsButton.textContent = credentialsVisible ? "Hide Credentials" : "Show Credentials";
 
       if (credentialsVisible) {
-        document.getElementById("githubUser").textContent = "Hidden";
-        document.getElementById("githubPass").textContent = "Hidden";
-        document.getElementById("craftyUser").textContent = "Hidden";
-        document.getElementById("craftyPass").textContent = "Hidden";
+        document.getElementById("githubUser").textContent = "aryan0106gupta@gmail.com";
+        document.getElementById("githubPass").textContent = "xh6fknwj0f@";
+        document.getElementById("craftyUser").textContent = "guest";
+        document.getElementById("craftyPass").textContent = "CraftyGuest";
       }
     });
   }

@@ -1,4 +1,4 @@
-let codespaceName = "zany-enigma-6xpww5g5j5jfx64j";
+let codespaceName = "glorious-fishstick-jpg99757pg6hp47r";
 let updateInterval;
 
 function updateLinks() {

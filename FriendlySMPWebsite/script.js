@@ -2,7 +2,7 @@ let codespaceName = "glorious-fishstick-jpg99757pg6hp47r";
 let updateInterval;
 
 function updateLinks() {
-  document.getElementById('startServer').onclick = () => window.open(`https://${codespaceName}.github.dev`, '_blank');
+  document.getElementById('startServer').onclick = () => window.open(`https://${codespaceName}.github.dev/?autoStart=false`, '_blank');
   // Check if optional elements exist before setting their events or text
   if (document.getElementById('craftyPanel')) {
     document.getElementById('craftyPanel').onclick = () => window.open(`https://${codespaceName}-8443.app.github.dev`, '_blank');

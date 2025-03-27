@@ -1,4 +1,4 @@
-let codespaceName = "glorious-fishstick-jpg99757pg6hp47r";
+let codespaceName = "friendly-giggle-5g5xx6x66gj7fp47q";
 let updateInterval;
 
 function updateLinks() {
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
       credsButton.textContent = credentialsVisible ? "Hide Credentials" : "Show Credentials";
 
       if (credentialsVisible) {
-        document.getElementById("githubUser").textContent = "anju2590gupta@gmail.com";
+        document.getElementById("githubUser").textContent = "aryaveer2023singh@gmail.com";
         document.getElementById("githubPass").textContent = "xh6fknwj0f@";
         document.getElementById("craftyUser").textContent = "guest";
         document.getElementById("craftyPass").textContent = "CraftyGuest";

@@ -1,11 +1,11 @@
-let codespaceName = "friendly-giggle-5g5xx6x66gj7fp47q";
+let codespaceName = "effective-trout-r4wp5479vpxpc5qv5";
 let updateInterval;
 
 function updateLinks() {
   document.getElementById('startServer').onclick = () => window.open(`https://${codespaceName}.github.dev/?autoStart=false`, '_blank');
   // Check if optional elements exist before setting their events or text
   if (document.getElementById('craftyPanel')) {
-    document.getElementById('craftyPanel').onclick = () => window.open(`https://${codespaceName}-8443.app.github.dev`, '_blank');
+    document.getElementById('craftyPanel').onclick = () => window.open(`https://limited-grave.gl.at.ply.gg:2654/panel/dashboard`, '_blank');
   }
   if (document.getElementById('javaIP')) {
     document.getElementById('javaIP').textContent = "buying-hz.gl.joinmc.link";
@@ -96,10 +96,10 @@ document.addEventListener("DOMContentLoaded", function () {
       credsButton.textContent = credentialsVisible ? "Hide Credentials" : "Show Credentials";
 
       if (credentialsVisible) {
-        document.getElementById("githubUser").textContent = "aryaveer2023singh@gmail.com";
-        document.getElementById("githubPass").textContent = "xh6fknwj0f@";
-        document.getElementById("craftyUser").textContent = "guest";
-        document.getElementById("craftyPass").textContent = "CraftyGuest";
+        document.getElementById("githubUser").textContent = "Hidden";
+        document.getElementById("githubPass").textContent = "Hidden";
+        document.getElementById("craftyUser").textContent = "Hidden";
+        document.getElementById("craftyPass").textContent = "Hidden";
       }
     });
   }

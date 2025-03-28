@@ -82,7 +82,7 @@ function checkServerStatus() {
             playerDiv.classList.add('player-item');
 
             let icon = document.createElement('img');
-            icon.src = "alex-icon.png"; // Use a Bedrock icon for Bedrock players (optional, can keep the same)
+            icon.src = "steve-icon.png"; // Use a Bedrock icon for Bedrock players (optional, can keep the same)
             icon.classList.add('player-icon');
 
             let playerName = document.createElement('span');

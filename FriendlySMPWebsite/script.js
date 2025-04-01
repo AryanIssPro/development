@@ -11,10 +11,10 @@ function updateLinks() {
     document.getElementById('javaIP').textContent = "buying-hz.gl.joinmc.link";
   }
   if (document.getElementById('bedrockIP')) {
-    document.getElementById('bedrockIP').textContent = "final-specifics.gl.at.ply.gg";
+    document.getElementById('bedrockIP').textContent = "trade-occasions.gl.at.ply.gg";
   }
   if (document.getElementById('bedrockPort')) {
-    document.getElementById('bedrockPort').textContent = "2494";
+    document.getElementById('bedrockPort').textContent = "1525";
   }
 }
 

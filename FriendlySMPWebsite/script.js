@@ -1,4 +1,4 @@
-let codespaceName = "effective-trout-r4wp5479vpxpc5qv5";
+let codespaceName = "ideal-doodle-r5xww6g6q4jhwq4";
 let updateInterval;
 
 function updateLinks() {

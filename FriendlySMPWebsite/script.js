@@ -19,46 +19,41 @@ function updateLinks() {
 }
 
 function checkServerStatus() {
-  // Clear previous content
-  let javaPlayersSpan = document.getElementById('javaPlayers');
-  javaPlayersSpan.innerHTML = "";
+  const javaPlayersSpan = document.getElementById('javaPlayers');
+  const javaStatus = document.getElementById('javaStatus');
+  const javaPlayerList = document.getElementById('javaPlayerList');
 
-  // Check Java Server
+  javaPlayersSpan.innerHTML = ""; // Clear previous players
+
+  let totalPlayers = 0;
+
+  // Fetch Java server data
   fetch("https://api.mcsrvstat.us/2/buying-hz.gl.joinmc.link")
     .then(response => response.json())
     .then(data => {
-      let javaStatus = document.getElementById('javaStatus');
-      let javaPlayerList = document.getElementById('javaPlayerList');
-
       if (data.online) {
         javaStatus.textContent = "Online";
         javaStatus.classList.add('online');
         javaStatus.classList.remove('offline');
-
         javaPlayerList.style.display = "block";
 
-        if (data.players && data.players.online > 0 && data.players.list && data.players.list.length > 0) {
-          data.players.list.forEach((name) => {
-            let playerDiv = document.createElement('div');
+        if (data.players && data.players.online > 0 && data.players.list?.length > 0) {
+          totalPlayers += data.players.list.length;
+          data.players.list.forEach(name => {
+            const playerDiv = document.createElement('div');
             playerDiv.classList.add('player-item');
 
-            let icon = document.createElement('img');
-            icon.src = "steve-icon.png"; // Java icon
+            const icon = document.createElement('img');
+            icon.src = "steve-icon.png";
             icon.classList.add('player-icon');
 
-            let playerName = document.createElement('span');
-            playerName.textContent = `${name} (Java)`;
+            const playerName = document.createElement('span');
+            playerName.textContent = name;
 
             playerDiv.appendChild(icon);
             playerDiv.appendChild(playerName);
-
             javaPlayersSpan.appendChild(playerDiv);
           });
-        } else {
-          let noPlayersMsg = document.createElement('div');
-          noPlayersMsg.classList.add('player-item', 'no-players');
-          noPlayersMsg.textContent = "No Java players online!";
-          javaPlayersSpan.appendChild(noPlayersMsg);
         }
       } else {
         javaStatus.textContent = "Offline";
@@ -68,44 +63,38 @@ function checkServerStatus() {
       }
     });
 
-  // Check Bedrock Server and show in same javaPlayersSpan container
+  // Fetch Bedrock server data
   fetch("https://api.mcsrvstat.us/2/transportation-carb.gl.at.ply.gg")
     .then(response => response.json())
     .then(data => {
-      let bedrockPlayersExist = false;
+      if (data.online && data.players && data.players.online > 0 && data.players.list?.length > 0) {
+        totalPlayers += data.players.list.length;
+        data.players.list.forEach(name => {
+          const playerDiv = document.createElement('div');
+          playerDiv.classList.add('player-item');
 
-      if (data.online) {
-        if (data.players && data.players.online > 0 && data.players.list && data.players.list.length > 0) {
-          bedrockPlayersExist = true;
-          data.players.list.forEach((name) => {
-            let playerDiv = document.createElement('div');
-            playerDiv.classList.add('player-item');
+          const icon = document.createElement('img');
+          icon.src = "steve-icon.png";
+          icon.classList.add('player-icon');
 
-            let icon = document.createElement('img');
-            icon.src = "steve-icon.png"; // Same icon or change if you want a different one
-            icon.classList.add('player-icon');
+          const playerName = document.createElement('span');
+          playerName.textContent = name;
 
-            let playerName = document.createElement('span');
-            playerName.textContent = `${name} (Bedrock)`;
-
-            playerDiv.appendChild(icon);
-            playerDiv.appendChild(playerName);
-
-            javaPlayersSpan.appendChild(playerDiv);
-          });
-        }
+          playerDiv.appendChild(icon);
+          playerDiv.appendChild(playerName);
+          javaPlayersSpan.appendChild(playerDiv);
+        });
       }
 
-      // If no Bedrock players online, show a message
-      if (!bedrockPlayersExist) {
-        let noPlayersMsg = document.createElement('div');
+      // Show "no players" message if no one is online on either
+      if (totalPlayers === 0) {
+        const noPlayersMsg = document.createElement('div');
         noPlayersMsg.classList.add('player-item', 'no-players');
-        noPlayersMsg.textContent = "No Bedrock players online!";
+        noPlayersMsg.textContent = "No players online!";
         javaPlayersSpan.appendChild(noPlayersMsg);
       }
     });
 }
-
 
 document.addEventListener("DOMContentLoaded", function () {
   updateLinks();
